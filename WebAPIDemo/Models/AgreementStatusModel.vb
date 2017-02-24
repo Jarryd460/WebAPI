@@ -1,23 +1,23 @@
 ﻿Public Class AgreementStatusModel
 
-    Private c_agreementStatusID As Guid
-    Private c_agreementStatus As String
+    Private c_idAgreementStatus As Guid
+    Private c_strAgreementStatus As String
 
     Public Property ID() As Guid
         Get
-            Return c_agreementStatusID
+            Return c_idAgreementStatus
         End Get
         Set(Value As Guid)
-            c_agreementStatusID = Value
+            c_idAgreementStatus = Value
         End Set
     End Property
 
     Public Property Status() As String
         Get
-            Return c_agreementStatus
+            Return c_strAgreementStatus
         End Get
         Set(Value As String)
-            c_agreementStatus = Value
+            c_strAgreementStatus = Value
         End Set
     End Property
 

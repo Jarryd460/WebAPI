@@ -274,6 +274,7 @@
     <Compile Include="Models\AccountViewModels.vb" />
     <Compile Include="Models\Agreement.vb" />
     <Compile Include="Models\AgreementStatusModel.vb" />
+    <Compile Include="Models\AgreementTypeModel.vb" />
     <Compile Include="Models\clsLicenseStatus.vb" />
     <Compile Include="Models\clsLicenseType.vb" />
     <Compile Include="Models\enumLicenseSearch.vb" />
@@ -283,6 +284,7 @@
     <Compile Include="Models\LicenseModel.vb" />
     <Compile Include="Models\LicenseRepository.vb" />
     <Compile Include="Models\LicenseSearch.vb" />
+    <Compile Include="Models\LicenseStatusModel.vb" />
     <Compile Include="Models\LicenseStatusRepository.vb" />
     <Compile Include="Models\LicenseTypeModel.vb" />
     <Compile Include="Models\LicenseTypeRepository.vb" />

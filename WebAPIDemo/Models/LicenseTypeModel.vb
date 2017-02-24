@@ -1,7 +1,7 @@
 ﻿Public Class LicenseTypeModel
 
     Private c_idLicenseType As Guid
-    Private c_LicenseType As String
+    Private c_strLicenseType As String
 
     Public Property ID() As Guid
         Get
@@ -14,10 +14,10 @@
 
     Public Property Type() As String
         Get
-            Return c_LicenseType
+            Return c_strLicenseType
         End Get
         Set(Value As String)
-            c_LicenseType = Value
+            c_strLicenseType = Value
         End Set
     End Property
 
