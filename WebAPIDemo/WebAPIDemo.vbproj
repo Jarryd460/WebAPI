@@ -272,7 +272,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.vb" />
     <Compile Include="Models\AccountViewModels.vb" />
-    <Compile Include="Models\AgreementModel.vb" />
+    <Compile Include="Models\AgreementStatusModel.vb" />
     <Compile Include="Models\clsLicenseStatus.vb" />
     <Compile Include="Models\clsLicenseType.vb" />
     <Compile Include="Models\enumLicenseSearch.vb" />
