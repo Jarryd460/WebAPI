@@ -15,4 +15,49 @@
 
     End Sub
 
+    Public Property ID() As Guid
+        Get
+            Return c_idAgreement
+        End Get
+        Set(Value As Guid)
+            c_idAgreement = Value
+        End Set
+    End Property
+
+    Public Property c_strName As String
+        Get
+            Return c_strName
+        End Get
+        Set(Value As String)
+            c_strName = Value
+        End Set
+    End Property
+
+    Public Property c_guidType As Guid
+        Get
+            Return c_guidType
+        End Get
+        Set(Value As Guid)
+            c_guidType = Value
+        End Set
+    End Property
+
+    Public Property c_guidStatus As Integer
+        Get
+            Return c_guidStatus
+        End Get
+        Set(Value As Integer)
+            c_guidStatus = Value
+        End Set
+    End Property
+
+    Public Property c_dteEndDate As Date
+        Get
+            Return c_dteEndDate
+        End Get
+        Set(Value As Date)
+            c_dteEndDate = Value
+        End Set
+    End Property
+
 End Class
