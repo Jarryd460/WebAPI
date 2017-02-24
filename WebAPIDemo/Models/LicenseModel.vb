@@ -21,6 +21,7 @@ Public Class LicenseModel
         Me.c_guidStatus = guidStatus
         Me.c_dteApplicationDate = dteApplicationDate
         Me.c_intAgreementsCount = intAgreementsCount
+        Me.c_lstAgreements = Nothing
     End Sub
 
     Public Property ID() As Guid
@@ -86,31 +87,46 @@ Public Class LicenseModel
         End Set
     End Property
 
+    Public Property Agreements() As List(Of AgreementModel)
+        Get
+            Return c_lstAgreements
+        End Get
+        Set(Value As List(Of AgreementModel))
+            c_lstAgreements = Value
+        End Set
+    End Property
+
     Public Shared Function ConvertFCClassLibraryLicenseToAPILicense(drLicense As DataRow) As LicenseModel
-        'Dim guidLicense As Guid
-        'Dim strName As String = ""
-        'Dim guidType As Guid
-        'Dim guidStatus As Integer
-        'Dim dteApplicationDate As Date = NULL_DATE
-        'Dim intAgreementsCount As Integer
+        Dim guidLicense As Guid
+        Dim strName As String
+        Dim strCode As String
+        Dim guidType As Guid
+        Dim guidStatus As Integer
+        Dim dteApplicationDate As Date
+        Dim intAgreementsCount As Integer
 
-        'LoadDBValue(drLicense.Item(FieldName_License(enumTableField_License.ID)), guidLicense)
-        'LoadDBValue(drLicense.Item(FieldName_License(enumTableField_License.Name)), strName)
-        'LoadDBValue(drLicense.Item(FieldName_License(enumTableField_License.Type)), guidType)
-        'LoadDBValue(drLicense.Item(FieldName_License(enumTableField_License.Status)), guidStatus)
-        'LoadDBValue(drLicense.Item(FieldName_License(enumTableField_License.DateApplication)), dteApplicationDate)
+        guidLicense = drLicense.Item(FieldName_License(enumTableField_License.ID))
+        strName = drLicense.Item(FieldName_License(enumTableField_License.Name))
+        strCode = drLicense.Item(FieldName_License(enumTableField_License.Code))
+        guidType = drLicense.Item(FieldName_License(enumTableField_License.TypeID))
+        guidStatus = drLicense.Item(FieldName_License(enumTableField_License.StatusID))
+        dteApplicationDate = drLicense.Item(FieldName_License(enumTableField_License.DateApplication))
+        intAgreementsCount = drLicense.Item(FieldName_License(enumTableField_License.AgreementCount))
 
-        'DBCon.LookupValue(FieldName_LicenseType(enumTableField_LicenseType.LicenseType), FieldName_LicenseType(enumTableField_LicenseType.LicenseTypeID), "tblLicenseType", License.c_strLicenseType)
+        'DBCon.LookupValue(FieldName_LicenseType(enumTableField_LicenseType.LicenseType), FieldName_LicenseType(enumTableField_LicenseType.LicenseTypeID), "tblLicenseType", )
         'DBCon.LookupValue(FieldName_LicenseStatus(enumTableField_LicenseStatus.LicenseStatus), FieldName_LicenseStatus(enumTableField_LicenseStatus.ID), "lutLicenseStatus", License.c_strLicenseStatus_ID)
 
-        'Return New LicenseModel(guidLicense, strName, guidType, guidStatus, dteApplicationDate)
+        Return New LicenseModel(guidLicense, strName, strCode, guidType, guidStatus, dteApplicationDate, intAgreementsCount)
     End Function
 
-    Public Shared Function ConvertAPILicenseToFCClassLibraryLicense(ByVal DBCon As DBConnection, ByVal license As LicenseModel) As FCClassLibrary.License
+    Public Shared Function ConvertAPILicenseToFCClassLibraryLicense(ByVal licenseModel As LicenseModel) As FCClassLibrary.License
         Dim licenseFC As FCClassLibrary.License
         Dim objLookupManager As LookupManager
         Dim objAuthorisationController As AuthorisationController
         Dim objUser As User
+        Dim DBCon As DBConnection
+
+        DBCon = NewConnection()
 
         objUser = New User(DBCon)
 
@@ -118,15 +134,25 @@ Public Class LicenseModel
 
         objAuthorisationController = New AuthorisationController(DBCon, objLookupManager, objUser.User_guid, "English", False)
 
-        licenseFC = New FCClassLibrary.License(DBCon, license.License_ID, objLookupManager, objAuthorisationController, Asset.enumLoadFlags.Licenses, False)
+        licenseFC = New FCClassLibrary.License(DBCon, licenseModel.ID, objLookupManager, objAuthorisationController, Asset.enumLoadFlags.Licenses, False)
 
-        licenseFC.LicenseName = license.Name
-        licenseFC.LicenseCode = license.Code
-        licenseFC.LicenseTypeID = license.Type
-        licenseFC.LicenseStatus_ID = license.Status
-        licenseFC.DateApplication = license.Application_Date
+        licenseFC.LicenseName = licenseModel.Name
+        licenseFC.LicenseCode = licenseModel.Code
+        licenseFC.LicenseTypeID = licenseModel.Type
+        licenseFC.LicenseStatus_ID = licenseModel.Status
+        licenseFC.DateApplication = licenseModel.Application_Date
 
         Return licenseFC
+    End Function
+
+    Public Shared Function ConvertFCClassLibraryLicenseToAPILicense(ByVal licenseFC As FCClassLibrary.License) As LicenseModel
+        Return New LicenseModel(licenseFC.ID,
+                                licenseFC.LicenseName,
+                                licenseFC.LicenseCode,
+                                licenseFC.LicenseTypeID,
+                                licenseFC.LicenseStatus_ID,
+                                licenseFC.DateApplication,
+                                licenseFC.Agreements.RowCount)
     End Function
 
 End Class
