@@ -284,6 +284,7 @@
     <Compile Include="Models\LicenseRepository.vb" />
     <Compile Include="Models\LicenseSearch.vb" />
     <Compile Include="Models\LicenseStatusRepository.vb" />
+    <Compile Include="Models\LicenseTypeModel.vb" />
     <Compile Include="Models\LicenseTypeRepository.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
