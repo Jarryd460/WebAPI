@@ -78,34 +78,34 @@ Public Class LicenseSearch
         Dim dtActions As DataTable
         Dim objActionColumns As TableFieldList(Of enumTableField_License)
 
-        If txtActionDateSelected.Text <> "" Then
-            c_objActionSearch = New SearchAction()
-            objSearchPart = New SearchPartAction()
+        'If txtActionDateSelected.Text <> "" Then
+        '    c_objActionSearch = New SearchAction()
+        '    objSearchPart = New SearchPartAction()
 
-            objSearchPart.AddParameterGuid(SearchPartAction.enumSearchParameter_Guid.ActionType, StringToGUID(cmbActionTypes.SelectedValue))
+        '    objSearchPart.AddParameterGuid(SearchPartAction.enumSearchParameter_Guid.ActionType, StringToGUID(cmbActionTypes.SelectedValue))
 
-            objSearchPart.AddParameter_ExplicitDateRange(SearchPartAction.enumSearchParameter_Date.DueDate, calActionDue.SelectedDate, SessionManager.Item(GS_DATE_FORMAT), ISearchPart.enumSearchDateOperator.Minimum, True)
-            objSearchPart.AddParameter_ExplicitDateRange(SearchPartAction.enumSearchParameter_Date.DueDate, calActionDue.SelectedDate.AddYears(1), SessionManager.Item(GS_DATE_FORMAT), ISearchPart.enumSearchDateOperator.Maximum, True)
+        '    objSearchPart.AddParameter_ExplicitDateRange(SearchPartAction.enumSearchParameter_Date.DueDate, calActionDue.SelectedDate, SessionManager.Item(GS_DATE_FORMAT), ISearchPart.enumSearchDateOperator.Minimum, True)
+        '    objSearchPart.AddParameter_ExplicitDateRange(SearchPartAction.enumSearchParameter_Date.DueDate, calActionDue.SelectedDate.AddYears(1), SessionManager.Item(GS_DATE_FORMAT), ISearchPart.enumSearchDateOperator.Maximum, True)
 
-            c_objActionSearch.AddSearchPart(objSearchPart)
+        '    c_objActionSearch.AddSearchPart(objSearchPart)
 
-            c_objActionSearch.MaximumRecordCount = 1000
+        '    c_objActionSearch.MaximumRecordCount = 1000
 
-            objActionColumns = New TableFieldList(Of enumTableField_License)
-            objActionColumns.AddField(enumTableField_Action.ID)
-            objActionColumns.AddField(enumTableField_Action.Name)
-            objActionColumns.AddField(enumTableField_Action.Code)
-            objActionColumns.AddField(enumTableField_Action.TypeID)
-            objActionColumns.AddField(enumTableField_Action.Summary)
-            objActionColumns.AddField(enumTableField_Action.DateDue)
+        '    objActionColumns = New TableFieldList(Of enumTableField_License)
+        '    objActionColumns.AddField(enumTableField_Action.ID)
+        '    objActionColumns.AddField(enumTableField_Action.Name)
+        '    objActionColumns.AddField(enumTableField_Action.Code)
+        '    objActionColumns.AddField(enumTableField_Action.TypeID)
+        '    objActionColumns.AddField(enumTableField_Action.Summary)
+        '    objActionColumns.AddField(enumTableField_Action.DateDue)
 
-            c_objActionSearch.FieldList = objActionColumns
-            dtActions = c_objActionSearch.Search(DBCon, LookupManager, UserLanguage, enumIsolationLevel.NOTSET)
+        '    c_objActionSearch.FieldList = objActionColumns
+        '    dtActions = c_objActionSearch.Search(DBCon, LookupManager, UserLanguage, enumIsolationLevel.NOTSET)
 
-            grdActions.DataSource = dtActions
-            grdActions.DataBind()
-            btnSave.Enabled = True
-            'ViewState.Add(Me.ClientID + S_SEARCH_ACTION, c_objActionSearch)
+        '    grdActions.DataSource = dtActions
+        '    grdActions.DataBind()
+        '    btnSave.Enabled = True
+        'ViewState.Add(Me.ClientID + S_SEARCH_ACTION, c_objActionSearch)
 
 
         'Dim strWhere As String = ""
