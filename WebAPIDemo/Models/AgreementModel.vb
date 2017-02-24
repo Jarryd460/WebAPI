@@ -77,4 +77,20 @@ Public Class AgreementModel
         Return New AgreementModel(guidAgreement, strName, guidType, guidStatus, dteEndDate)
     End Function
 
+    Public Shared Function ConvertFCClassLibraryAgreementToAPIAgreement(drLicense As DataRow) As AgreementModel
+        Dim guidAgreement As Guid
+        Dim strName As String
+        Dim guidType As Guid
+        Dim guidStatus As Integer
+        Dim dteEndDate As Date
+
+        guidAgreement = drLicense.Item(FieldName_Agreement(enumTableField_Agreement.ID))
+        strName = drLicense.Item(FieldName_Agreement(enumTableField_Agreement.Name))
+        guidType = drLicense.Item(FieldName_Agreement(enumTableField_Agreement.AgreementTypeID))
+        guidStatus = drLicense.Item(FieldName_Agreement(enumTableField_Agreement.AgreementStatusID))
+        dteEndDate = drLicense.Item(FieldName_Agreement(enumTableField_Agreement.DateEnd))
+
+        Return New AgreementModel(guidAgreement, strName, guidType, guidStatus, dteEndDate)
+    End Function
+
 End Class
